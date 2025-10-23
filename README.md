@@ -92,11 +92,12 @@ Le script crée les éléments suivants :
 ### Permissions par Rôle
 
 | Action                        | Propriétaire | Admin | Contributeur |
-| ----------------------------- | ------------ | ----- | ------------ |
-| Créer un projet               | ✅           | ❌    | ❌           |
-| Modifier le projet            | ✅           | ✅    | ❌           |
-| Supprimer le projet           | ✅           | ❌    | ❌           |
-| Ajouter/Retirer contributeurs | ✅           | ✅    | ❌           |
-| Créer des tâches              | ✅           | ✅    | ✅           |
-| Modifier des tâches           | ✅           | ✅    | ✅           |
-| Supprimer des tâches          | ✅           | ✅    | ✅           |
+|-------------------------------|--------------|-------|--------------|
+| Créer un projet               | ✅            | ❌     | ❌            |
+| Modifier le projet            | ✅            | ✅     | ❌            |
+| Supprimer le projet           | ✅            | ❌     | ❌            |
+| Ajouter/Retirer contributeurs | ✅            | ✅     | ❌            |
+| Lister les tâches d'un projet | ✅            | ✅     | ✅            |
+| Créer des tâches              | ✅            | ✅     | ✅            |
+| Modifier des tâches           | ✅            | ✅     | ✅            |
+| Supprimer des tâches          | ✅            | ✅     | ✅            |

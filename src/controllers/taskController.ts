@@ -191,8 +191,57 @@ export const createTask = async (
 };
 
 /**
- * Récupérer toutes les tâches d'un projet
- * GET /projects/:projectId/tasks
+ * @swagger
+ * /projects/{id}/tasks:
+ *   get:
+ *     summary: Récupérer toutes les tâches d'un projet
+ *     description: Retourne la liste complète des tâches associées à un projet spécifique, incluant les détails du créateur, les assignations et les commentaires
+ *     tags: [Projets]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID du projet
+ *         example: "clm123abc456"
+ *     responses:
+ *       200:
+ *         description: Tâches récupérées avec succès
+ *         content:
+ *           application/json:
+ *             schema:
+ *               allOf:
+ *                 - $ref: '#/components/schemas/Success'
+ *                 - type: object
+ *                   properties:
+ *                     data:
+ *                       type: object
+ *                       properties:
+ *                         tasks:
+ *                           type: array
+ *                           items:
+ *                             $ref: '#/components/schemas/Task'
+ *       401:
+ *         description: Non authentifié
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Error'
+ *       403:
+ *         description: Accès refusé - L'utilisateur n'a pas accès à ce projet
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Error'
+ *       500:
+ *         description: Erreur serveur
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Error'
  */
 export const getTasks = async (req: Request, res: Response): Promise<void> => {
   try {
