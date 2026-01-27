@@ -125,6 +125,8 @@ export const createProject = async (
             id: true,
             email: true,
             name: true,
+            createdAt: true,
+            updatedAt: true,
           },
         },
         members: {
@@ -134,6 +136,8 @@ export const createProject = async (
                 id: true,
                 email: true,
                 name: true,
+                createdAt: true,
+                updatedAt: true,
               },
             },
           },
@@ -183,6 +187,8 @@ export const createProject = async (
             id: true,
             email: true,
             name: true,
+            createdAt: true,
+            updatedAt: true,
           },
         },
         members: {
@@ -192,6 +198,8 @@ export const createProject = async (
                 id: true,
                 email: true,
                 name: true,
+                createdAt: true,
+                updatedAt: true,
               },
             },
           },
@@ -279,6 +287,9 @@ export const getProjects = async (
             id: true,
             email: true,
             name: true,
+            createdAt: true,
+            updatedAt: true,
+
           },
         },
         members: {
@@ -288,6 +299,8 @@ export const getProjects = async (
                 id: true,
                 email: true,
                 name: true,
+                createdAt: true,
+                updatedAt: true,
               },
             },
           },
@@ -355,6 +368,8 @@ export const getProject = async (
             id: true,
             email: true,
             name: true,
+            createdAt: true,
+            updatedAt: true,
           },
         },
         members: {
@@ -364,6 +379,8 @@ export const getProject = async (
                 id: true,
                 email: true,
                 name: true,
+                createdAt: true,
+                updatedAt: true,
               },
             },
           },
@@ -375,6 +392,37 @@ export const getProject = async (
                 id: true,
                 email: true,
                 name: true,
+                createdAt: true,
+                updatedAt: true,
+              },
+            },
+            assignees: {
+              include: {
+                user: {
+                  select: {
+                    id: true,
+                    name: true,
+                    email: true,
+                    createdAt: true,
+                    updatedAt: true,
+                  }
+                }
+              }
+            },
+            comments: {
+              include: {
+                author: {
+                  select: {
+                    id: true,
+                    name: true,
+                    email: true,
+                    createdAt: true,
+                    updatedAt: true,
+                  },
+                },
+              },
+              orderBy: {
+                createdAt: "desc",
               },
             },
           },
@@ -406,7 +454,6 @@ export const getProject = async (
     sendServerError(res, "Erreur lors de la récupération du projet");
   }
 };
-
 /**
  * Mettre à jour un projet
  * PUT /projects/:id

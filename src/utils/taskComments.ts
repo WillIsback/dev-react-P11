@@ -16,6 +16,8 @@ export const getTaskComments = async (taskId: string) => {
           id: true,
           email: true,
           name: true,
+          createdAt: true,
+          updatedAt: true,
         },
       },
     },
@@ -25,6 +27,8 @@ export const getTaskComments = async (taskId: string) => {
   return comments.map((comment) => ({
     id: comment.id,
     content: comment.content,
+    taskId: comment.taskId,      
+    authorId: comment.authorId,   
     createdAt: comment.createdAt,
     updatedAt: comment.updatedAt,
     author: comment.author,

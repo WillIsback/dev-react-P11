@@ -63,6 +63,8 @@ export const getTaskAssignments = async (taskId: string) => {
           id: true,
           email: true,
           name: true,
+          createdAt: true,
+          updatedAt: true,
         },
       },
     },
@@ -70,6 +72,8 @@ export const getTaskAssignments = async (taskId: string) => {
 
   return assignees.map((assignee) => ({
     id: assignee.id,
+    userId: assignee.userId,
+    taskId: assignee.taskId,
     assignedAt: assignee.assignedAt,
     user: assignee.user,
   }));

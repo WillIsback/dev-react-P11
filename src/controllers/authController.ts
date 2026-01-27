@@ -132,6 +132,7 @@ export const register = async (req: Request, res: Response): Promise<void> => {
         email: true,
         name: true,
         createdAt: true,
+        updatedAt: true,
       },
     });
 
@@ -257,6 +258,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
       email: user.email,
       name: user.name,
       createdAt: user.createdAt,
+      updatedAt: user.updatedAt,
     };
 
     // Envoyer la réponse

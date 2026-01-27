@@ -10,14 +10,21 @@ Cette base de code est l'API REST complète pour l'authentification et la gestio
 npm install
 ```
 
-2. Configurer la base de données :
+2. Configurer le fichier d'environnement .env :
+
+```yml
+DATABASE_URL="file:./dev.db"
+JWT_SECRET="ton_super_secret"
+```
+
+3. Configurer la base de données :
 
 ```bash
 npx prisma generate
 npx prisma db push
 ```
 
-3. Démarrer le serveur :
+4. Démarrer le serveur :
 
 ```bash
 npm run dev
@@ -92,12 +99,12 @@ Le script crée les éléments suivants :
 ### Permissions par Rôle
 
 | Action                        | Propriétaire | Admin | Contributeur |
-|-------------------------------|--------------|-------|--------------|
-| Créer un projet               | ✅            | ❌     | ❌            |
-| Modifier le projet            | ✅            | ✅     | ❌            |
-| Supprimer le projet           | ✅            | ❌     | ❌            |
-| Ajouter/Retirer contributeurs | ✅            | ✅     | ❌            |
-| Lister les tâches d'un projet | ✅            | ✅     | ✅            |
-| Créer des tâches              | ✅            | ✅     | ✅            |
-| Modifier des tâches           | ✅            | ✅     | ✅            |
-| Supprimer des tâches          | ✅            | ✅     | ✅            |
+| ----------------------------- | ------------ | ----- | ------------ |
+| Créer un projet               | ✅           | ❌    | ❌           |
+| Modifier le projet            | ✅           | ✅    | ❌           |
+| Supprimer le projet           | ✅           | ❌    | ❌           |
+| Ajouter/Retirer contributeurs | ✅           | ✅    | ❌           |
+| Lister les tâches d'un projet | ✅           | ✅    | ✅           |
+| Créer des tâches              | ✅           | ✅    | ✅           |
+| Modifier des tâches           | ✅           | ✅    | ✅           |
+| Supprimer des tâches          | ✅           | ✅    | ✅           |

@@ -35,6 +35,8 @@ export const authenticateToken = async (
         id: true,
         email: true,
         name: true,
+        createdAt: true,
+        updatedAt: true,
       },
     });
 
@@ -48,6 +50,8 @@ export const authenticateToken = async (
       id: user.id,
       email: user.email,
       name: user.name || undefined,
+      createdAt: user.createdAt.toISOString(),
+      updatedAt: user.updatedAt.toISOString(),
     };
     next();
   } catch (error) {
@@ -87,6 +91,8 @@ export const optionalAuth = async (
         id: true,
         email: true,
         name: true,
+        createdAt: true,
+        updatedAt: true,
       },
     });
 
@@ -95,6 +101,9 @@ export const optionalAuth = async (
         id: user.id,
         email: user.email,
         name: user.name || undefined,
+        createdAt: user.createdAt.toISOString(),
+        updatedAt: user.updatedAt.toISOString(),
+
       };
     }
 

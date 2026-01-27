@@ -72,6 +72,8 @@ export const getAssignedTasks = async (
                 id: true,
                 name: true,
                 email: true,
+                createdAt: true,
+                updatedAt: true,
               },
             },
           },
@@ -83,6 +85,8 @@ export const getAssignedTasks = async (
                 id: true,
                 name: true,
                 email: true,
+                createdAt: true,
+                updatedAt: true,
               },
             },
           },
@@ -181,6 +185,21 @@ export const getProjectsWithTasks = async (
             id: true,
             name: true,
             email: true,
+            createdAt: true,
+            updatedAt: true,
+          },
+        },
+        members: {
+          include: {
+            user: {
+              select: {
+                id: true,
+                name: true,
+                email: true,
+                createdAt: true,
+                updatedAt: true,
+              },
+            },
           },
         },
         tasks: {
@@ -199,6 +218,8 @@ export const getProjectsWithTasks = async (
                     id: true,
                     name: true,
                     email: true,
+                    createdAt: true,
+                    updatedAt: true,
                   },
                 },
               },
@@ -210,6 +231,8 @@ export const getProjectsWithTasks = async (
                     id: true,
                     name: true,
                     email: true,
+                    createdAt: true,
+                    updatedAt: true,
                   },
                 },
               },
@@ -219,12 +242,8 @@ export const getProjectsWithTasks = async (
             },
           },
           orderBy: [
-            {
-              priority: "asc", // URGENT, HIGH, MEDIUM, LOW
-            },
-            {
-              dueDate: "asc",
-            },
+            { priority: "asc" },
+            { dueDate: "asc" },
           ],
         },
       },
