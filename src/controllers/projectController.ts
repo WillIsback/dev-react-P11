@@ -513,6 +513,8 @@ export const updateProject = async (
             id: true,
             email: true,
             name: true,
+            createdAt: true,
+            updatedAt: true,
           },
         },
         members: {
@@ -522,6 +524,8 @@ export const updateProject = async (
                 id: true,
                 email: true,
                 name: true,
+                createdAt: true,
+                updatedAt: true,
               },
             },
           },

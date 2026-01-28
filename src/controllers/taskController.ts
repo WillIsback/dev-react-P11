@@ -38,7 +38,6 @@ export const createTask = async (
     console.log("Paramètres reçus:", req.params);
     console.log("projectId extrait:", projectId);
     console.log("Tous les paramètres:", Object.keys(req.params));
-
     if (!projectId || typeof projectId !== "string") {
       sendError(res, "ID de projet invalide", "INVALID_PROJECT_ID", 400);
       return;
@@ -140,6 +139,7 @@ export const createTask = async (
 
     // Ajouter les assignations si fournies
     if (assigneeIds && assigneeIds.length > 0) {
+
       await updateTaskAssignments(task.id, assigneeIds);
     }
 
