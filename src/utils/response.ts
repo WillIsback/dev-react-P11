@@ -56,9 +56,13 @@ export const sendValidationError = (
   message: string,
   errors: any[]
 ): void => {
+  // Construire un message détaillé avec les erreurs
+  const errorMessages = errors.map((e) => e.message).join(". ");
+  const fullMessage = errorMessages ? `${message}: ${errorMessages}` : message;
+
   const response: ApiResponse = {
     success: false,
-    message,
+    message: fullMessage,
     error: "Validation failed",
     data: { errors },
   };

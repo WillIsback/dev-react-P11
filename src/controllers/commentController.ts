@@ -84,6 +84,8 @@ export const createComment = async (
             id: true,
             email: true,
             name: true,
+            createdAt: true,
+            updatedAt: true,
           },
         },
         task: {
@@ -149,6 +151,8 @@ export const getComments = async (
             id: true,
             email: true,
             name: true,
+            createdAt: true,
+            updatedAt: true,
           },
         },
         task: {
@@ -208,6 +212,8 @@ export const getComment = async (
             id: true,
             email: true,
             name: true,
+            createdAt: true,
+            updatedAt: true,
           },
         },
         task: {
@@ -307,6 +313,8 @@ export const updateComment = async (
             id: true,
             email: true,
             name: true,
+            createdAt: true,
+            updatedAt: true,
           },
         },
         task: {

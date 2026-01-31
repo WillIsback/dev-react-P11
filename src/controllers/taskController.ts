@@ -55,7 +55,6 @@ export const createTask = async (
       sendError(res, "Utilisateur non authentifié", "UNAUTHORIZED", 401);
       return;
     }
-
     // Validation des données
     const validationErrors = validateCreateTaskData({
       title,

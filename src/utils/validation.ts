@@ -173,7 +173,6 @@ export const validateUpdatePasswordData = (data: {
       message: "Le nouveau mot de passe doit être différent de l'actuel",
     });
   }
-
   return errors;
 };
 
@@ -323,7 +322,7 @@ export const validateCreateTaskData = (data: {
       message: "La priorité doit être LOW, MEDIUM, HIGH ou URGENT",
     });
   }
-
+  console.log('date format sent: ', data.dueDate)
   // Validation de la date d'échéance
   if (data.dueDate && !isValidDate(data.dueDate)) {
     errors.push({
@@ -350,7 +349,7 @@ export const validateCreateTaskData = (data: {
       });
     }
   }
-
+  console.log(errors)
   return errors;
 };
 
