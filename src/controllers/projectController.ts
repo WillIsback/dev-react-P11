@@ -464,7 +464,7 @@ export const updateProject = async (
 ): Promise<void> => {
   try {
     const { id } = req.params;
-    const { name, description }: UpdateProjectRequest = req.body;
+    const { name, description, contributors }: UpdateProjectRequest = req.body;
     const authReq = req as AuthRequest;
 
     if (!authReq.user) {
@@ -473,7 +473,7 @@ export const updateProject = async (
     }
 
     // Validation des données
-    const validationErrors = validateUpdateProjectData({ name, description });
+    const validationErrors = validateUpdateProjectData({ name, description, contributors });
     if (validationErrors.length > 0) {
       sendValidationError(
         res,
@@ -507,6 +507,60 @@ export const updateProject = async (
     const updatedProject = await prisma.project.update({
       where: { id },
       data: updateData,
+    });
+
+    // Mettre à jour les contributeurs si fournis
+    if (contributors !== undefined) {
+      // Récupérer le projet pour connaître le propriétaire
+      const project = await prisma.project.findUnique({
+        where: { id },
+        select: { ownerId: true },
+      });
+
+      // Supprimer tous les membres actuels (sauf le propriétaire qui n'est pas dans ProjectMember)
+      await prisma.projectMember.deleteMany({
+        where: { projectId: id },
+      });
+
+      // Ajouter les nouveaux contributeurs
+      if (contributors.length > 0) {
+        const contributorUsers = await prisma.user.findMany({
+          where: {
+            email: {
+              in: contributors.map((email) => email.toLowerCase()),
+            },
+            // Exclure le propriétaire de la liste des contributeurs
+            NOT: {
+              id: project?.ownerId,
+            },
+          },
+          select: {
+            id: true,
+            email: true,
+          },
+        });
+
+        if (contributorUsers.length > 0) {
+          for (const user of contributorUsers) {
+            try {
+              await prisma.projectMember.create({
+                data: {
+                  userId: user.id,
+                  projectId: id,
+                  role: "CONTRIBUTOR",
+                },
+              });
+            } catch (error) {
+              console.log(`Utilisateur ${user.email} déjà membre du projet`);
+            }
+          }
+        }
+      }
+    }
+
+    // Récupérer le projet avec les membres mis à jour
+    const projectWithMembers = await prisma.project.findUnique({
+      where: { id },
       include: {
         owner: {
           select: {
@@ -539,7 +593,7 @@ export const updateProject = async (
     });
 
     sendSuccess(res, "Projet mis à jour avec succès", {
-      project: updatedProject,
+      project: projectWithMembers,
     });
   } catch (error) {
     console.error("Erreur lors de la mise à jour du projet:", error);

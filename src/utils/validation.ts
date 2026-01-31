@@ -241,6 +241,7 @@ export const validateCreateProjectData = (data: {
 export const validateUpdateProjectData = (data: {
   name?: string;
   description?: string;
+  contributors?: string[];
 }): ValidationError[] => {
   const errors: ValidationError[] = [];
 
@@ -271,7 +272,24 @@ export const validateUpdateProjectData = (data: {
       message: "La description ne peut pas dépasser 500 caractères",
     });
   }
-
+  // Validation des contributeurs
+  if (data.contributors !== undefined ) {
+    if (!Array.isArray(data.contributors)) {
+      errors.push({
+        field: "contributors",
+        message: "Les contributeurs doivent être un tableau",
+      });
+    } else {
+      data.contributors.forEach((email, index) => {
+        if (!isValidEmail(email)) {
+          errors.push({
+            field: `contributors[${index}]`,
+            message: "Format d'email invalide",
+          });
+        }
+      });
+    }
+  }
   return errors;
 };
 
